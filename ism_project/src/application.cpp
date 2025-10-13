@@ -6,7 +6,7 @@
 static state_motor_t state_motor;
 
 static cfg_motor M1 = {34, 35, 12};
-static cfg_motor M2 = {};
+static cfg_motor M2 = {37, 36, 8};
 static uint16_t timeout;
 static uint16_t start_time;
 
