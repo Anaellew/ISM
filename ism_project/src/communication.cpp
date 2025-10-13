@@ -1,6 +1,11 @@
 #include <Arduino.h>
 #include <communication.h>
 
+
+static int16_t code_stop = 0;
+static int16_t code_forward = 1;
+static int16_t code_turn = 2;
+
 message_t receive(){
     message_t msg;
     char mots[24][3] = {0};

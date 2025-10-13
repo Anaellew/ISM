@@ -28,12 +28,13 @@ bool check_msg(){
 }
 
 void on_dt_event(){
+    message_t msg;
     switch (state_motor){
         case IDLE:
             if (check_msg()) state_motor = RECEIVING;
         break;
         case RECEIVING:
-            message_t msg = receive();
+            msg = receive();
             timeout = msg.timeout;
             start_time = millis();
             if (msg.code == 0) state_motor = STOP;

@@ -41,7 +41,7 @@ bool control_motor(cfg_motor M, int16_t voltage) {
   return true;
 }
 
-void init() {
+void init2() {
   Serial.begin(115200);
 
   pinMode(M1.PWM, OUTPUT);

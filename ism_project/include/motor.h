@@ -9,10 +9,10 @@ typedef struct cfg_motor {
 
 bool control_motor(cfg_motor M, int16_t voltage);
 
-void motor_coast(cfg_motor M);
-
-void init();
+void init2();
 
 void test();
+
+void motor_coast(cfg_motor M);
 
 #endif 
