@@ -6,8 +6,13 @@
 #include <motor.h>
 #include <communication.h>
 
-static cfg_moteur M1;
-
+typedef enum state_motor_t {
+    IDLE,
+    RECEIVING,
+    STOP,
+    FORWARD,
+    TURN
+}state_motor_t;
 
 bool stop();
 bool forward(uint16_t tension);
