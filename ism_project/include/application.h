@@ -15,9 +15,9 @@ typedef enum state_motor_t {
 }state_motor_t;
 
 bool stop();
-bool forward(uint16_t tension);
-bool turn(uint16_t tension);
-bool existe_message();
+bool forward(uint16_t voltage);
+bool turn(uint16_t voltage);
+bool check_msg();
 
 void on_dt_event();
 
