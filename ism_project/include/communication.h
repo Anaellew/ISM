@@ -3,14 +3,14 @@
 
 #include <stdint.h>
 
-typedef struct message{
+typedef struct message_t{
     uint16_t code;
     uint16_t timeout;
     uint16_t tension;
-} message;
+} message_t;
 
-message receive();
+message_t receive();
 
-bool send(message msg);
+bool send(message_t msg);
 
 #endif
