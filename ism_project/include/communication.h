@@ -6,7 +6,7 @@
 typedef struct message_t{
     uint16_t code;
     uint16_t timeout;
-    uint16_t tension;
+    uint16_t voltage;
 } message_t;
 
 message_t receive();

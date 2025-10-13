@@ -13,32 +13,32 @@ enum state_motor_t {
 
 state_motor_t state_motor;
 
-static cfg_moteur M1;
-static cfg_moteur M2;
+static cfg_motor M1;
+static cfg_motor M2;
 uint16_t timeout;
 uint16_t tps_debut;
 
 
 bool stop(){
-    return controler_moteur(M1, 0) && controler_moteur(M2, 0);
+    return control_motor(M1, 0) && control_motor(M2, 0);
 }
 
-bool forward(uint16_t tension){
-    return controler_moteur(M1, tension) && controler_moteur(M2, -tension);
+bool forward(uint16_t voltage){
+    return control_motor(M1, voltage) && control_motor(M2, -voltage);
 }
 
-bool turn(uint16_t tension){
-    return controler_moteur(M1, tension);
+bool turn(uint16_t voltage){
+    return control_motor(M1, voltage);
 }
 
-bool existe_message(){
+bool check_msg(){
     return (Serial.available() > 0);
 }
 
 void on_dt_event(){
     switch (state_motor){
         case IDLE:
-            if (existe_message()) state_motor = RECEIVING;
+            if (check_msg()) state_motor = RECEIVING;
         break;
         case RECEIVING:
             message_t msg = receive();
@@ -50,17 +50,17 @@ void on_dt_event(){
         break;
         case STOP:
             stop();
-            if(existe_message()) state_motor = RECEIVING;
+            if(check_msg()) state_motor = RECEIVING;
         break;
         case FORWARD:
-            forward(msg.tension);
+            forward(msg.voltage);
             if(millis()-tps_debut > timeout) state_motor = IDLE;
-            if(existe_message()) state_motor = RECEIVING;
+            if(check_msg()) state_motor = RECEIVING;
         break;
         case TURN:
-            turn(msg.tension);
+            turn(msg.voltage);
             if(millis()-tps_debut > timeout) state_motor = IDLE;
-            if(existe_message()) state_motor = RECEIVING;
+            if(check_msg()) state_motor = RECEIVING;
         break;
     } 
 }

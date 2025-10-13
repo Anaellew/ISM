@@ -1,12 +1,12 @@
 #ifndef MOTOR
 #define MOTOR
 
-typedef struct cfg_moteur {
+typedef struct cfg_motor {
 		uint16_t BI1;
 		uint16_t BI2;
 		uint16_t PWM;
-	} cfg_moteur;
+	} cfg_motor;
 
-bool controler_moteur(cfg_moteur M, int16_t tension);
+bool control_motor(cfg_motor M, int16_t voltage);
 
 #endif 
