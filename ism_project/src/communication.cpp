@@ -45,9 +45,12 @@ message_t receive(){
     return msg;
 }
 
-bool send(message_t msg){
-    // A implémenter en temps voulu
-    return false;
+void send(message_t msg){
+    Serial.print(msg.code);
+    Serial.print(" ");
+    Serial.print(msg.timeout);
+    Serial.print(" ");
+    Serial.println(msg.voltage);
 }
 
 bool compare_code(char str1[24], char str2[24]){

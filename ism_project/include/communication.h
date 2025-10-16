@@ -11,7 +11,7 @@ typedef struct message_t{
 
 message_t receive();
 
-bool send(message_t msg);
+void send(message_t msg);
 
 bool compare_code(char str1[24], char str2[24]);
 
