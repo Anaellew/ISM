@@ -59,7 +59,7 @@ void app_on_dt_event(){
             if (app_check_char()) state_communication = RECEIVING;
         break;
         case RECEIVING:
-            msg = comm_receive();
+            msg = comm_receive_complete();
             timeout = msg.timeout;
             if (msg.code == 0) state_motor = STOP;
             if (msg.code == 1) {
