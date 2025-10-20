@@ -1,5 +1,6 @@
 #include <Arduino.h>
-#include <communication.h>
+#include "communication.h"
+#include "application.h"
 
 
 static int16_t code_stop = 0;
@@ -41,6 +42,14 @@ message_t receive(){
         msg.code = code_turn;
         msg.timeout = atoi(mots[1]);
         msg.voltage = atoi(mots[2]);
+    }
+
+    for (int i = 0; i<commandes->len; i++){
+        if (compare_code(mots[0] commandes->table[i])){
+            msg.code = i;
+            msg.timeout = atoi(mots[1]);
+            msg.voltage = atoi(mots[2]);
+        }
     }
 
     Serial.println(msg.code);
