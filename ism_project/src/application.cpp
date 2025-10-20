@@ -8,7 +8,6 @@
 static state_motor_t state_motor;
 static state_communication_t state_communication;
 
-
 static cfg_motor M1 = {34, 35, 12};
 static cfg_motor M2 = {37, 36, 8};
 static uint16_t timeout;
@@ -32,10 +31,6 @@ bool app_check_char(){
 
 void app_on_dt_event(){
     message_t msg;
-    msg.code = 1;
-    msg.timeout = 1000;
-    msg.voltage = 2;
-
     switch (state_motor){
         case STOP:
             app_stop();
@@ -78,4 +73,9 @@ void app_on_dt_event(){
             state_communication = IDLE;
         break;
     }
+}
+
+void app_init(){
+    state_motor = STOP;
+    state_communication = IDLE;
 }

@@ -29,6 +29,7 @@ bool app_turn(uint16_t voltage);
 bool app_check_char();
 
 void app_on_dt_event();
+void app_init();
 
 #endif
 
