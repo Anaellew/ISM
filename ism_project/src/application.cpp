@@ -14,8 +14,6 @@ static cfg_motor M2 = {37, 36, 8};
 static uint16_t timeout;
 static uint16_t start_time;
 
-table_cmd* commandes;
-
 bool app_stop(){
     return control_motor(M1, 0) && control_motor(M2, 0);
 }
@@ -29,7 +27,7 @@ bool app_turn(uint16_t voltage){
 }
 
 bool app_check_char(){
-    return false; //(Serial.available() > 0);
+    return (Serial.available() > 0);
 }
 
 void app_on_dt_event(){
@@ -40,22 +38,18 @@ void app_on_dt_event(){
 
     switch (state_motor){
         case STOP:
-            Serial.println("STOP");
             app_stop();
             if(app_check_char()) state_communication = RECEIVING;
         break;
         case FORWARD:
-            Serial.println("FORWARD");
             app_forward(msg.voltage);
             if(millis()- start_time > timeout){
-                Serial.println("Seconde finie");
                 state_communication = IDLE;
                 state_motor = STOP;
             }
             if(app_check_char()) state_communication = RECEIVING;
         break;
         case TURN:
-            Serial.println("TURN");
             app_turn(msg.voltage);
             if(millis()- start_time > timeout){
                 state_communication = IDLE;
@@ -67,12 +61,10 @@ void app_on_dt_event(){
 
     switch (state_communication){
         case IDLE:
-            Serial.println("IDLE");
             if (app_check_char()) state_communication = RECEIVING;
         break;
         case RECEIVING:
-            Serial.println("RECEIVING");
-            //msg = comm_receive();
+            msg = comm_receive();
             timeout = msg.timeout;
             if (msg.code == 0) state_motor = STOP;
             if (msg.code == 1) {
@@ -86,14 +78,4 @@ void app_on_dt_event(){
             state_communication = IDLE;
         break;
     }
-}
-
-
-void setup(){
-    Serial.begin(115200);
-    state_communication = RECEIVING;
-}
-
-void loop(){
-    app_on_dt_event();
 }
