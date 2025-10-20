@@ -2,14 +2,9 @@
 #include "communication.h"
 #include "application.h"
 
-
-static int16_t code_stop = 0;
-static int16_t code_forward = 1;
-static int16_t code_turn = 2;
-
 message_t comm_receive_complete(){
     message_t msg;
-    char mots[3][24] = {0};
+    char mots[MAX_WORDS_NB][MAX_WORD_LEN] = {0};
     char c;
     int16_t i = 0;
     int16_t j = 0;
@@ -30,11 +25,13 @@ message_t comm_receive_complete(){
     }
     mots[wordCount][j] = '\0';
 
-    for (int i = 0; i<commandes.len; i++){
+    for (uint16_t i = 0; i<commandes.len; i++){
         if (compare_code(mots[0], commandes.table[i])){
+            Serial.print(mots[0]);
             msg.code = i;
             msg.timeout = atoi(mots[1]);
             msg.voltage = atoi(mots[2]);
+            break;
         }
     }
 
@@ -46,7 +43,7 @@ message_t comm_receive_complete(){
 
 bool compare_code(const char* str1, const char* str2){
     int16_t i = 0;
-    while (i<24){
+    while (i<MAX_WORD_LEN){
         if (str1[i] != str2[i]){
             return false;
         }

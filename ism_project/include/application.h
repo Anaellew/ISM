@@ -17,11 +17,11 @@ typedef enum state_communication_t {
     RECEIVING
 }state_communication_t;
 
-typedef struct table_cmd {
+typedef struct  {
     const char* table[3];
     uint16_t len;
 } table_cmd;
-table_cmd commandes = {{"STOP", "FORWARD", "TURN"}, 3};
+extern table_cmd commandes;
 
 bool app_stop();
 bool app_forward(uint16_t voltage);

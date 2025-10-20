@@ -3,6 +3,6 @@
 
 void test_communication(){
     if (Serial.available() > 0){
-        send(receive());
+        send(comm_receive_complete());
     }
 }

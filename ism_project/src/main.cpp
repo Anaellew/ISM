@@ -9,8 +9,5 @@ void setup() {
 }
 
 void loop() {
-    //app_on_dt_event();
-    if (Serial.available()>0){
-        comm_receive_complete();
-    }
+    app_on_dt_event();
 }

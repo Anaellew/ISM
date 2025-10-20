@@ -13,6 +13,8 @@ static cfg_motor M2 = {37, 36, 8};
 static uint16_t timeout;
 static uint16_t start_time;
 
+table_cmd commandes = {{"STOP", "FORWARD", "TURN"}, 3};
+
 bool app_stop(){
     return control_motor(M1, 0) && control_motor(M2, 0);
 }

@@ -14,8 +14,6 @@ typedef struct message_t{
 
 message_t comm_receive_complete();
 
-void send(message_t msg);
-
 bool compare_code(const char str1[24], const char str2[24]);
 
 #endif
