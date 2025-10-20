@@ -32,4 +32,3 @@ void app_on_dt_event();
 void app_init();
 
 #endif
-
