@@ -1,6 +1,8 @@
 #ifndef MOTOR
 #define MOTOR
 
+#include <stdint.h>
+
 typedef struct cfg_motor {
 		uint16_t BI1;
 		uint16_t BI2;

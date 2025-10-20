@@ -8,7 +8,7 @@ static int16_t code_turn = 2;
 
 message_t receive(){
     message_t msg;
-    char mots[24][3] = {0};
+    char mots[3][24] = {0};
     char c;
     int16_t i = 0;
     int16_t j = 0;
@@ -18,16 +18,16 @@ message_t receive(){
     while (Serial.available() > 0 && i<24 && wordCount < 3){
         c = Serial.read();
         if (c == ' '){
+            mots[wordCount][j] = '\0';
             wordCount ++;
-            mots[j][wordCount] = '\0';
             j = 0;
         } else {
-            mots[j][wordCount] = c;
+            mots[wordCount][j] = c;
             j++;
         }
         i++;
     }
-    mots[j][wordCount] = '\0';
+    mots[wordCount][j] = '\0';
 
     if (compare_code(mots[0], "STOP")){
         msg.code = code_stop;
@@ -42,6 +42,10 @@ message_t receive(){
         msg.timeout = atoi(mots[1]);
         msg.voltage = atoi(mots[2]);
     }
+
+    Serial.println(msg.code);
+    Serial.println(msg.timeout);
+    Serial.println(msg.voltage);
     return msg;
 }
 
@@ -53,7 +57,8 @@ void send(message_t msg){
     Serial.println(msg.voltage);
 }
 
-bool compare_code(char str1[24], char str2[24]){
+
+bool compare_code(const char* str1, const char* str2){
     int16_t i = 0;
     while (i<24){
         if (str1[i] != str2[i]){
