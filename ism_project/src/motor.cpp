@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "motor.h"
+#include <stdint.h>
 
 #define MAX_DUTY 191
 #define MAX_VOLTAGE 9.0
