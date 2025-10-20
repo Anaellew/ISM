@@ -3,13 +3,16 @@
 
 #include <stdint.h>
 
+#define MAX_WORD_LEN 24
+#define MAX_WORDS_NB 3
+
 typedef struct message_t{
     uint16_t code;
     uint16_t timeout;
     uint16_t voltage;
 } message_t;
 
-message_t receive();
+message_t comm_receive_complete();
 
 void send(message_t msg);
 
